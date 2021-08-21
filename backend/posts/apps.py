@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class TodosConfig(AppConfig):
+class PostsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'todos'
+    name = 'posts'

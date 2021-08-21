@@ -32,3 +32,25 @@ a dedicated `getTodos` function for this purpose.
 the React lifecycle. HTTP requests should be made using `componentDidMount` so we
 will call getTodos there.
 ```
+
+```python
+# new
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',    # default port for React app
+    'http://localhost:8000',    # port for hosting the api
+)
+
+# third-party
+    'rest_framework',
+    'corsheaders',
+
+# Cors middleware
+    'corsheaders.middleware.CorsMiddleware',
+
+# Explicitly allowing permissions for everyone
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.AllowAny',
+    ]
+}
+```
