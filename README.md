@@ -1,5 +1,8 @@
 # polls-api
 An end-to-end development process of Django Rest Framework (DRF)
+For the Full Blog API, checkout to `chapter03-blog-api`
+- `chapter03-blog-api` is a stand-alone project not merged with main
+
 
 # Adding CORS
 
