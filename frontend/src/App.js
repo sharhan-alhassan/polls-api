@@ -1,44 +1,83 @@
-import logo from './logo.svg';
+
 import './App.css';
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import axios from 'axios'; //new
 
-const list  = [
-    {
-        "id": 1,
-        "title": "laravel development",
-        "body": "If you make changes to your local copy and push them to GitHub and need to push them to production, here’s a quick how-to (logged in as our user from earlier)."
-    },
-    {
-        "id": 2,
-        "title": "django tutorials",
-        "body": "If you make changes to your local copy and push them to GitHub and need to push them to production, here’s a quick how-to (logged in as our user from earlier)."
-    },
-    {
-        "id": 3,
-        "title": "Sahih Bukhari",
-        "body": "If you make changes to your local copy and push them to GitHub and need to push them to production, here’s a quick how-to (logged in as our user from earlier)."
-    }
-]
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { list };
-  }
+  state = {
+  todos: []
+};
 
+  // new
+  componentDidMount() {
+  this.getTodos();
+}
+
+  // new
+  getTodos() {
+    axios
+      .get('http://localhost:8000/api/')
+      .then(res => {
+      this.setState({ todos: res.data });
+      })
+      .catch(err => {
+      console.log(err);
+      });
+}
   render() {
     return (
-       <div>
-         {this.state.list.map(item => (
-           <div key={item.id}>
-             <h1>{item.title}</h1>
-             <p>{item.body}</p>
-           </div>
-         ))}
-       </div>
+    <div>
+      {this.state.todos.map(item => (
+      <div key={item.id}>
+        <h1>{item.title}</h1>
+        <p>{item.body}</p>
+      </div>
+      ))}
+    </div>
     );
   }
 }
+
+
+
+
+// class App extends Component {
+//   state = {
+//     todos: []
+//   };
+
+//   //new
+//   componentDidMount(){
+//     this.getTodos();
+//   }
+
+//   //new
+//   getTodos(){
+//     axios
+//       .get('http://127.0.0.1:8000/api/')
+//       .then(res => {
+//         this.setState({ todos: res.data });
+//       })
+//       .catch(err => {
+//         console.log(err);
+//       });
+//   }
+
+//   render(){
+//     return(
+//       <div>
+//         {this.state.todos.map(item => (
+//           <div key={item.id}>
+//             <h1>{this.title}</h1>
+//             <spam>{this.body}</spam>
+//           </div>
+//         ))}
+//       </div>
+//     );
+//   }
+// }
+
 
 export default App;
