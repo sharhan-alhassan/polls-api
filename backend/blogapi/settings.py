@@ -37,14 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # new from allauth
 
     # local
     'posts.apps.PostsConfig',
 
     # third-party
     'rest_framework',
+    'rest_framework.authtoken', # generates tokens on the server for clients
+    'rest_auth',    # login/logout/password reset
+    'rest_auth.registration',   # from allauth for registration
     'corsheaders',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +64,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Email Backend and Site ID
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+SITE_ID = 1 
+
 
 # new
 CORS_ORIGIN_WHITELIST = (
@@ -142,6 +154,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Explicitly allowing permissions for everyone
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-    'rest_framework.permissions.AllowAny',
-    ]
+    'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [ # new
+    'rest_framework.authentication.SessionAuthentication',  # for browsable api
+    'rest_framework.authentication.TokenAuthentication', # for clients
+    ],
 }
