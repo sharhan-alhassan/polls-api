@@ -1,4 +1,4 @@
-#!/home/sharhan/DEV/PYTHON/LIVE PROJECTS/polls-api/backend/venv/bin/python3
+#!/home/sharhan/DEV/PYTHON/LIVE PROJECTS/polls-api/backend/venv/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
